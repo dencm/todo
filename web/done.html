@@ -47,18 +47,18 @@
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" 
      style="display: none;">
     <div class="modal-dialog">
-    	<div class="loginmodal-container">
-    		<h1>Login</h1><br>
-    	  <form>
-    		<input type="text" name="user" placeholder="Username" id="user">
-    		<input type="password" name="pass" placeholder="Password" id="pwd">
-    		<input type="submit" name="login" class="login loginmodal-submit" value="Login" id="login-btn">
-    	  </form>
-    		
-    	  <div class="login-help">
-    		<a href="#">Register</a> - <a href="#">Forgot Password</a>
-    	  </div>
-    	</div>
+        <div class="loginmodal-container">
+            <h1>Login</h1><br>
+          <form>
+            <input type="text" name="user" placeholder="Username" id="user">
+            <input type="password" name="pass" placeholder="Password" id="pwd">
+            <input type="submit" name="login" class="login loginmodal-submit" value="Login" id="login-btn">
+          </form>
+            
+          <div class="login-help">
+            <a href="#">Register</a> - <a href="#">Forgot Password</a>
+          </div>
+        </div>
     </div>
 </div>
 
@@ -97,7 +97,7 @@
                 <br>
                 <div class="row">
                     <div class="col-lg-12">
-            				
+                            
                             <div class="panel panel-default">
                                 <div class="panel-heading"></div>
                                 <div class="panel-body">
@@ -133,7 +133,7 @@
     <script src="js/dataTables.bootstrap.min.js"></script>
     <script src="js/dataTables.responsive.js"></script>
     <script src="js/dataTables.select.min.js"></script>
-	
+    
     <script src="js/customer.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/bootstrap-datetimepicker.js"></script>
@@ -144,7 +144,7 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-	//$("#login").click();
+    //$("#login").click();
     
 
     $.getJSON( "host.json", function( data ) {
@@ -167,22 +167,35 @@
             initDone();
         }
     });
-	
+    
     $("#login-btn").click(function(e) {
         e.preventDefault();
-		$('#login-modal').modal('toggle');
-		if($('#user').val() == 'test' && $('#pwd').val() == 'foo'){
-			init();
-		}
+        $('#login-modal').modal('toggle');
+        if($('#user').val() == 'test' && $('#pwd').val() == 'foo'){
+            init();
+        }
     });
 
     $(document).ready(function() {
         var table = $('#dataTables-example1').DataTable({
             responsive: true,
+            columnDefs: [ {
+                targets:   0,
+                width: "55%"
+            }, {
+                targets:   1,
+                width: "15%"
+            }, {
+                targets:   2,
+                width: "15%"
+            }, {
+                targets:   3,
+                width: "15%"
+            } ],
             order: [[ 1, 'desc' ]]
         });
     });
-	
+    
     </script>
 
 </body>

@@ -97,12 +97,12 @@
                  </div>
                  <div class="col-lg-6 col-xs-12" style="margin-top:20px">
                      <div class="col-xs-3" style="margin-left:-30px">
-                         deadline:
+                      <input type="checkbox" id="chk-deadline"> Deadline:
                      </div>
                      <div id="sandbox-container" class="col-xs-9">
                          <div class="input-group date">
-                           <input type="text" class="form-control" id="date-value">
-                           <span class="input-group-addon"><i class="glyphicon glyphicon-th" id="icon-date"></i></span>
+                           <input type="text" class="form-control" id="date-value" disabled>
+                           <span class="input-group-addon" disabled><i class="glyphicon glyphicon-th" id="icon-date"></i></span>
                          </div>
                      </div>
                  </div>
@@ -177,6 +177,16 @@
             $('#date-value').val(getCurrentDate());
         }
      });
+
+    $("#chk-deadline").change(function() {
+      if(this.checked) {
+        $("#date-value").prop( "disabled", false );
+        $("#icon-date").prop( "disabled", false );
+      }else{
+        $("#date-value").prop( "disabled", true );
+        $("#icon-date").prop( "disabled", true );
+      }
+    });
     
     $("#login-btn").click(function(e) {
         e.preventDefault();
@@ -220,20 +230,17 @@
                 data: null,
                 defaultContent: "<button>Done</button>",
                 targets:   0,
-				width: "10%"
-            },
-			{
+                width: "10%"
+            }, {
                 targets:   1,
-				width: "50%"
-            },
-			{
+                width: "50%"
+            }, {
                 targets:   2,
-				width: "20%"
-            },
-			{
+                width: "20%"
+            }, {
                 targets:   3,
-				width: "20%"
-            }			],
+                width: "20%"
+            } ],
             select: {
                 style:    'os',
                 selector: 'td:first-child'
