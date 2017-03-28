@@ -43,3 +43,12 @@ li.ui-state-default:last-child{
 #add{
     margin-top:10px;
 }
+#done{
+    margin-top:10px;
+}
+.due{
+    color:red;
+}
+.warn{
+    color:#FFB816;
+}

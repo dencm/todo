@@ -20,16 +20,26 @@ http.createServer(function(req, res){
     });
 
     req.on('end', function(){   
-		fs.writeFile("items.csv", post, function (err) {
+
+		var content = JSON.parse(fs.readFileSync('items.json', 'utf8'));
+
+        post = JSON.parse(post);
+		content.items.push(post);
+		fs.writeFile("items.json", JSON.stringify(content), function (err) {
 		  if (err) return console.log(err);
 		  console.log(post +"->"+"input.csv");
 		});
-        post = querystring.parse(post);
-        res.end(util.inspect(post));
+			 res.writeHead(200, {
+				 'Content-Type': 'text/html',
+				 'Access-Control-Allow-Origin': '*'
+				 });	
+			
+			 res.write("success");
+		  res.end();
     });
    } else if(pathname == "/read"){
 	   
-	   fs.readFile("items.csv", function (err, data) {
+	   fs.readFile("items.json", function (err, data) {
 		  if (err) {
 			 console.log(err);
 			 
@@ -43,13 +53,44 @@ http.createServer(function(req, res){
 				 'Access-Control-Allow-Origin': '*'
 				 });	
 			
-			 res.write(data.toString());		
+			 res.write(JSON.stringify(JSON.parse(data).items));		
 		  }
 		  
 		  res.end();
 	   })
+   } else if(pathname == "/update"){
+    var post = '';  
+
+    req.on('data', function(chunk){   
+        post += chunk;
+    });
+
+    req.on('end', function(){   
+
+		var content = JSON.parse(fs.readFileSync('items.json', 'utf8'));
+
+        post = JSON.parse(post);
+		//content.items.push(post);
+		for(var row in content.items) {
+			if(content.items[row].content == post.content){
+				content.items[row].done = post.done;
+				break;
+			}
+		}
+		fs.writeFile("items.json", JSON.stringify(content), function (err) {
+		  if (err) return console.log(err);
+		  console.log(post +"->"+"input.csv");
+		});
+			 res.writeHead(200, {
+				 'Content-Type': 'text/html',
+				 'Access-Control-Allow-Origin': '*'
+				 });	
+			
+			 res.write("success");
+		  res.end();
+    });
    }
-}).listen(process.env.PORT || 3000);
+}).listen(process.env.PORT || 3000);//
 
 
 console.log('Server running at test http://127.0.0.1:3000/');
