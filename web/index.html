@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>To Do</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/customerize.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/login.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<a href="#" data-toggle="modal" data-target="#login-modal" id="login" style="display: none;">Login</a><!--data-backdrop="static" data-keyboard="false" -->
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="loginmodal-container">
+					<h1>Login</h1><br>
+				  <form>
+					<input type="text" name="user" placeholder="Username" id="user">
+					<input type="password" name="pass" placeholder="Password" id="pwd">
+					<input type="submit" name="login" class="login loginmodal-submit" value="Login" id="login-btn">
+				  </form>
+					
+				  <div class="login-help">
+					<a href="#">Register</a> - <a href="#">Forgot Password</a>
+				  </div>
+				</div>
+			</div>
+		  </div>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="todo.html">
+                        To Do
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="todo.html">Todos</a>
+                </li> -->
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+			<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="todolist not-done">
+				<h1>Todos</h1>
+				<div class="col-md-6">
+					<input type="text" class="form-control add-todo" placeholder="Add todo" id ="newItem" style="margin-left:-15px;" >
+				</div>
+				<div class="col-md-2">
+					deadline:
+				</div>
+				<div id="sandbox-container" class="col-md-4">
+					<div class="input-group date">
+					  <input type="text" class="form-control" id="date-value">
+					  <span class="input-group-addon"><i class="glyphicon glyphicon-th" id="icon-date"></i></span>
+					</div>
+				</div>
+                <button id="add" class="btn btn-success">Add</button>
+                    
+                <hr>
+                <button id="checkAll" class="btn btn-success">Mark all as done</button>
+                 <ul id="sortable" class="list-unstyled">
+                    <!-- <li class="ui-state-default">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="" />Take out the trash</label>
+                        </div>
+                    </li>-->
+                </ul>
+                <div class="todo-footer">
+                    <strong><span class="count-todos"></span></strong> Items Left
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="todolist">
+             <h1>Already Done</h1>
+                <ul id="done-items" class="list-unstyled">
+                    <!-- <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
+                     -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	
+    <script src="js/customer.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/bootstrap-datetimepicker.js"></script>
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+	
+	$('#sandbox-container .input-group.date').datetimepicker({
+		format: "mm/DD/YYYY"
+	});
+	
+	$('#date-value').val(getDateValue())
+	$( "#sandbox-container" ).focusout(function() {
+		if($('#date-value').val() == ''){
+			$('#date-value').val(getDateValue());
+		}
+	  })
+	//$("#login").click();
+	init();
+	
+    $("#login-btn").click(function(e) {
+        e.preventDefault();
+		$('#login-modal').modal('toggle');
+		if($('#user').val() == 'test' && $('#pwd').val() == 'foo'){
+			init();
+		}
+    });
+	
+    </script>
+
+</body>
+
+</html>
