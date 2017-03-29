@@ -5,12 +5,6 @@ var readLink = "";
 var writeLink = "";
 var updateLink = "";
 
-// all done btn
-$("#checkAll").click(function(){
-    AllDone();
-    saveItems();
-});
-
 function initTodo(){
     $.ajax({url: readLink, success: function(result){
         var rows = JSON.parse(result);
@@ -48,36 +42,16 @@ function initDone(){
     }});
 };
     
-$("#done").click(function(){
-   if(selection != ''){
-         $.ajax({
-          type: "POST",
-          url: updateLink,
-          data: JSON.stringify({
-            "content":  selection,
-            "done": getCurrentDate()
-          }),
-          success: function(data) { 
-
-                 initTodo();
-             },
-          dataType: "text"
-        });
-   }else{
-       alert("Please select task");
-   }
-});
-    
 $("#add").click(function(){
    if($("#newItem").val() != ''){
-   var todo = $("#newItem").val();
+    var todo = $("#newItem").val();
      
-     var deadline = '';
-     if($("#chk-deadline")[0].checked) {
+    var deadline = '';
+    if($("#chk-deadline")[0].checked) {
         deadline=$('#date-value').val();
-     }
+    }
 
-   var t = $('#dataTables-example').DataTable();
+    var t = $('#dataTables-example').DataTable();
         t.row.add( [
             "",
             todo,
@@ -112,5 +86,5 @@ function getCurrentDate(){
     if(dd<10){ dd='0'+dd; } 
     if(mm<10){ mm='0'+mm; } 
     var hours = today.getHours(), minutes = today.getMinutes(), seconds = today.getSeconds(); 
-    return yyyy+'-'+mm+'-'+dd;//+' '+hours + (minutes < 10 ? ":0" : ":") + minutes+(seconds < 10 ? ":0" : ":") + seconds;  
+    return yyyy+'-'+mm+'-'+dd;
 };
